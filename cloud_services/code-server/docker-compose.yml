@@ -1,0 +1,34 @@
+# This is where we create development tools such as code-server for a hosted IDE
+version: '3'
+services:
+  code-server:
+    image: linuxserver/code-server:latest
+    container_name: vscode-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Oslo
+      - PASSWORD=${code-server_psw} #optional
+    volumes:
+      - ./:/config
+    ports:
+      - 9443:8443
+    restart: unless-stopped
+
+  ## Batches data from records like influxdb and trains ML models for autmations
+  jupyter:
+    image: amaksimov/python_data_science
+    container_name: keras_jupyter
+    depends_on:
+      - influxdb
+    volumes:
+      - ${path_prefix}/jupyter_notebooks:/notebooks
+    ports:
+      - 8899:8888
+      - 6006:6006
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: home

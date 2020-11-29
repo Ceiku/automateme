@@ -1,0 +1,20 @@
+# This is where we create our infrastructure such as admin tools for containers and networking.
+version: '3'
+volumes:
+  portainer_data:
+services:
+  ## Web monitoring tool for your docker engine, also gives powerful admin tool on the fly
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # do not remove
+      - portainer_data:/data
+    ports:
+      - 9000:9000
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: home
