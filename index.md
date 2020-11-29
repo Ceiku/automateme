@@ -3,11 +3,9 @@ title: "Automate Me Documentation"
 layout: single
 author_profile: true
 toc: true
-toc_label: "My Table of Contents"
+toc_label: "Overview"
 toc_icon: "cog"
 ---
-
-# Getting Started
 
 While this documentation and the provides the design choices and discusses the implementation, the specific instrunctions for each service and stack is found in the project readmes, the automate me blog series discuss ubiquitous computing concepts, market trends and how implementing this paradigm as end users and enterprices can add features and reduce costs. To make the project easy to use, customize and expand the services are presented as docker containers in compose files, each docker file represents a stack of relevant services, the three main stacks are:
 - Infrastructure: backups, network and security
