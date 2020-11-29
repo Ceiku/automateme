@@ -1,8 +1,8 @@
 main:
   - title: "Infrastructure"
     url: /infrastructure/
-  - title: "Everyday Computing"
-    url: /everyday_computing/
+  - title: "Cloud Services"
+    url: /cloud/
   - title: "Automation"
     url: /automation/
   - title: "About"
