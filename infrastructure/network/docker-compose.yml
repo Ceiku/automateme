@@ -1,0 +1,48 @@
+# This is where we enable our system to be connected to from outside the local gateway (your router) 
+version: '3'
+services:
+  ## Automates SLL CA certificates generation and renewal, it also has nginx that is used for reverse proxying
+  ## Setup shows how to use with domains.duckdns.org but is very flexible, check out docs for more.
+  ## Only use if you:
+    # Do not have a webhook service to reach your host instances
+    # Know how to safely expose your host ports (standard 433, and 80 will be used for http-01 test)
+  swag:
+    image: linuxserver/letsencrypt
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - URL=${domain}
+      - SUBDOMAINS=www,
+      - VALIDATION=duckdns
+      - DUCKDNSTOKEN=${duckdns_token}
+      - EMAIL=${email}
+    volumes:
+      - ${path_prefix}/swag:/config
+    ports:
+      - 443:443
+      # - 80:80 # use only during first run for http-01 test
+    restart: unless-stopped
+
+  ## The last bit to our swag stack is the duckdns resolver
+  ## Keeps duckdns dns record of your domains renewed your host puplic ip 
+  duckdns:
+    image: linuxserver/duckdns
+    container_name: duckdns
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - SUBDOMAINS=${domain}
+      - TOKEN=${duckdns_token}
+    volumes:
+      - ${path_prefix}/duckdns:/config
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: home
