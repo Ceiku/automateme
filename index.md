@@ -1,5 +1,5 @@
 ---
-title: "Post: Standard"
+title: "Automate Me Documentation"
 layout: single
 author_profile: true
 toc: true
