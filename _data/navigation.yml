@@ -1,9 +1,0 @@
-main:
-  - title: "Infrastructure"
-    url: /infrastructure/
-  - title: "Cloud Services"
-    url: /cloud/
-  - title: "Automation"
-    url: /automation/
-  - title: "About"
-    url: /about/
