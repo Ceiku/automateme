@@ -1,0 +1,12 @@
+version: '3'
+services: 
+  bareos-sd:
+    image: barcus/bareos-storage:latest
+    container_name: bareos-sd
+    ports:
+      - 9103:9103
+    volumes:
+      - ${path_prefix}/config/storage:/etc/bareos
+      - ${backup_path}:/var/lib/bareos/storage
+    environment:
+      - BAREOS_SD_PASSWORD=${sd_psw}

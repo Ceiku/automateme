@@ -1,0 +1,54 @@
+
+version: '3'
+services:
+  bareos-dir:
+    image: barcus/bareos-director:latest
+    container_name: bareos-dir
+    volumes:
+      - ${path_prefix}/config/director:/etc/bareos
+      - ${path_prefix}/data:/var/lib/bareos
+    environment:
+      - DB_PASSWORD=${db_psw}
+      - DB_HOST=bareosdb
+      - DB_NAME=bareos
+      - DB_USER=bareos
+      - DB_PORT=3306
+      - BAREOS_FD_HOST=192.168.1.42
+      - BAREOS_SD_HOST=192.168.1.62
+      - BAREOS_FD_PASSWORD=${fd_psw}
+      - BAREOS_SD_PASSWORD=${sd_psw}
+      - BAREOS_WEBUI_PASSWORD=${webui_psw}
+      - SMTP_HOST=smtpd
+      - ADMIN_MAIL=${admin_mail}
+    depends_on:
+      - bareos-db
+    ports:
+      - 9101:9101
+
+  bareos-webui:
+    image: barcus/bareos-webui:latest
+    container_name: bareos-ui
+    ports:
+      - 8080:80
+    environment:
+      - BAREOS_DIR_HOST=bareos-dir
+      - SERVER_STATS=yes
+    volumes:
+      - ${path_prefix}/config/webui:/etc/bareos-webui
+    depends_on:
+      - bareos-dir
+
+  bareos-db:
+   image: mysql:5.6
+   container_name: bareosdb
+   volumes:
+     - ${path_prefix}/db:/var/lib/mysql
+   environment:
+     - MYSQL_ROOT_PASSWORD=${db_psw}
+     - MYSQL_DATABASE=bareos
+     - MYSQL_USER=bareos
+     - MYSQL_PASSWORD=${db_psw}
+
+  smtpd:
+    image: namshi/smtp
+    container_name: smtp

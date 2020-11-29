@@ -1,0 +1,16 @@
+version: '3'
+services:
+  bareos-fd:
+    build: .
+    user: root
+    container_name: bareos-fd
+    volumes:
+      - ${path_prefix}/bareos/client:/etc/bareos
+      - ${path_prefix}/bareos/data:/var/lib/bareos-director
+      - ${backup_source}:/source
+    environment:
+      - BAREOS_FD_PASSWORD=${bfd_psw}
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - 9102:9102
