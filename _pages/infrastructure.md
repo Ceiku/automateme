@@ -1,5 +1,5 @@
 ---
-permalink: /about/
+permalink: /infrastructure/
 title: "Infrastructure"
 layout: single
 ---
