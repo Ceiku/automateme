@@ -29,7 +29,7 @@ The `init.sh` walks you through a few setup steps such as:
  
 It also provides one handy alias autome, that lets you supply stack names (selects all if none is provided) it will then run `docker-compose up -d --build --remove-orphans` selected stacks. It is important to note that these two helper scripts assume a debian flavour of linux, the current solution might need minor modifications to work on ARM architectures, look or request for the ARM branch for more information.
 
-#### Alternatively
+### Alternatively
 Each stack is contained as an independed docker-compose, so you could move it anywhere you wanted, just provide the '.env' file inside that directory instead.
 
 ## Notable Services:
