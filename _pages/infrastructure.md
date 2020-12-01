@@ -64,7 +64,7 @@ Virtual Private Networks is a conceptually easy and safe way to gain access to y
 For now zerotier is the only service that runs directly on the host, it is a feature currently under development.
 
 Instructions:
-- install zerotier on the hos: 
+- install zerotier on the host: 
   - `curl -s https://install.zerotier.com | sudo bash` 
   - Or alternatives here: [ZeroTier download](https://www.zerotier.com/download/)
 - log in to zerotier
@@ -81,10 +81,13 @@ sudo zerotier-cli join ################
 sudo zerotier-cli leave ################
 sudo zerotier-cli listnetworks
 `
+On the web page you should now see the device trying to connect, accept it.
+
+Mobile devices and desktops have client apps that you repeat the add and accept process with, their IP is reachable for all devices on the same virtual network.
 
 #### Reverse proxy
 
-This is no different than what most public web apps use as well, we forward the 443 (secure http(s)) port from our gateway to our node running the reverse proxy, we can then configure subdomains `subdomain.mydomain.org` or subfolders `mydomain.org/subfolder` that points to the other services we have. Since the communication over the unsafe open networks is secure, we often let the communication from our reverse proxy to our individual services remain on http without affecting our security, to increase general security the SWAG stack offers a set of options for elevated authentication.
+This is no different than what most public web apps use as well, we forward the 443 (secure http(s)) port from our gateway to our node running the reverse proxy, we can then configure subdomains `subdomain.mydomain.org` or subfolders `mydomain.org/subfolder` that points to the other services we have. Since the communication over the unsafe open networks is secure, we often let the communication from our reverse proxy to our individual services remain on http without affecting our security, to increase general security the SWAG stack offers a set of options for added authentication.
 
 In addition to SWAG, this stack by default comes with duckdns renewer that lets us get `domain.duckdns.org` for free that will point to our public IP, eg to our server.
 
