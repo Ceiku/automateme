@@ -7,11 +7,22 @@ toc_label: "Table of Contents"
 toc_icon: "cog"
 ---
 
-The services stacks presented here could be run individually, it is not a tutorial of basic functionality, but we do discuss some features that might not be apparent at first glance, and how they fit into our general idea of ubiquitous computing. As is discussed in the blog, the reasons for hosting our own solutions may be anything from extending commercial solution to flat out replacing them. While infrastructures detailed the backbone of all our services, here is where we offer our users functionalities.
+This is not a tutorial on the individual services, they are discussed a bit more in depth here, but they have thriving communities that I would suggest reading instead.
+In the aim of making our computer interactions available on any device, distributing them to the cloud is a key element, the main focus is to provide Nextcloud with file management, calendars, document collaboration. For developers the code-server gives us a cloud IDE (Visual Studio Code), setting up our shell and extensions to match our needs, now available on any device. We also discuss some tools for creative content developers who cannot find suitable tools for mobile devices, usually this is professional animation or video editing work and more in this blog post, even a comparison between LAN and cloud remote gaming. 
 
 ## Nextcloud
 
-Probably the most important stack in this group, it is a full blown cloud platform with all the features one would expect like calendars, file storage, document collaboration, there is even a nifty cookbook that can take links from most online recipe sites and extract the data into one common cookbook, it even has a built in timer; neato. Nextcloud is also scalable, and works well with the bareos backup manager, it comes with client apps for all OS and web view. 
+A cloud platform with all the whistle and bells of its commercial rivals, file storage, document collaboration, there is even a nifty cookbook that can take links from most online recipe sites and extract the data into one common cookbook, that even has a built in timer, it has a good app market and a thriving community. 
+
+On first setup you will be asked to set up a new admin user, use a strong password.
+Underneath you will see the storage and database section, select mariadb and fill in:
+
+"image"
+
+Select if you want the recommended apps or not, then you're ready to go.
+
+
+Nextcloud is also scalable to multiple instances, this support will come in the kubernetes release, it also works well with [bareos](https://nextcloud.com/blog/how-to-back-up-nextcloud-with-bareos/).
 
 ## Plex
 
