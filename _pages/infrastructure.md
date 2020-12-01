@@ -21,7 +21,7 @@ Layering the data from the system, then each application individually, how and w
 
 For a monolith structure, where we run everything on one node, we might want to provide a second disk, at least this way if a single disk faults, we have a backup, another solution is to encrypt, compress and store it on a free-tier cloud platform (eg. google drive provides 15gb free, provided compression at 60%-70% of original size it is 19.5 to 21 gb of total storage for your most essential files.)
 
-However this poses one difficulty, if one had mirrored the drive (like RAID 1) then we get away with changing boot disks and starting recovery, this would have to be done manually at bios. One option is to set up another node, it's job is backing up your primary node, it is still as many disks, now these partners may recover eachother without us getting our hands dirty in a bios, they can be kept truly headless.
+However this poses one difficulty, if one had mirrored the drive (like RAID 1) then we get away with just changing boot disks and starting recovery, this would have to be done manually at bios. Another option is to set up a secondary node, it's job is backing up your primary node, it is still as many disks, but these partners may recover eachother without us getting our hands dirty in a bios, they can be kept truly headless.
 
 Adding either a new node remotely, or using the cloud solution for user data we have reached the 1-2-3 of backups, there is at leas three layers of duplicity over three location (primary, secondary, remote).
 
@@ -63,6 +63,24 @@ Virtual Private Networks is a conceptually easy and safe way to gain access to y
 
 For now zerotier is the only service that runs directly on the host, it is a feature currently under development.
 
+Instructions:
+- install zerotier on the hos: 
+  - `curl -s https://install.zerotier.com | sudo bash` 
+  - Or alternatives here: [ZeroTier download](https://www.zerotier.com/download/)
+- log in to zerotier
+  - create network
+
+These commands should now work, using the network id from above try using these commands to join
+
+`
+# Get your ZeroTier address and check the service status
+sudo zerotier-cli status
+
+# Join, leave, and list networks
+sudo zerotier-cli join ################
+sudo zerotier-cli leave ################
+sudo zerotier-cli listnetworks
+`
 
 #### Reverse proxy
 
