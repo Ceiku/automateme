@@ -1,9 +1,9 @@
 ---
-title: "Automate Me Documentation"
+title: "Getting Started"
 layout: single
 author_profile: true
 toc: true
-toc_label: "Overview"
+toc_label: "Table of content"
 toc_icon: "cog"
 ---
 
