@@ -30,6 +30,8 @@ Adding either a new node remotely, or using the cloud solution for user data we 
 
 Backing up files and documents is quite different from live applications with databases, since they can change while we copy them the copies risk becoming corrupt, this is where bareos lets us easily manage backing up applications, clients and servers. It consist of three service stacks, the director runs all its dependencies including the web-ui, you usually only need one, and it can be run on the secondary following the topologies from above. The file-daemon is run on the node you want to back up, so probably primary if not both, the storage-deamon runs on nodes you want to back up to, it is however recommended to read up on bareos here.
 
+Besides system malfunctions, another reason for dataloss is user negligence or carelessness, we might delete files by accident, save over important documents etc, a good backup solution should manage both, in bareos we do this by providing incremental and differential backups in addition to full snapshots. If files are deleted, they are still saved in in the history of increments, Apples time machine is a commercial and user friendly application of this for their macs.
+
 To make it easy to configure your own setup you will see the bareos subfolder containing `docker-fileset.conf` this one can be left as is, it tells the system to back up everythin under this folder, in the docker compose, this folder is mounted to the path specified. The director, file and storage daemon come with their own conf examples too, this includes how to use both LAN and VPN (as we look at soon) to connect to our backup services. Each of these configurations must be stored in their respective subfolder of `project_root/bareos/config/director/bareos-dir.d` 
 
 Coming features:
@@ -46,12 +48,12 @@ One way to assure duplicity is using RAID configurations, it can additionally in
 
 ## Availability
 
-### Service uptime
+As we have seen with the dual node topology we can use one node to restore the other, while this greatly reduces the downtime of our services we might be able to do better, since we are taking a backup to the secondary node, if it had enough overhead it could run the most essential services while restoring the primary, the data is already there. 
+ 
 
-As we have seen with the dual node topology we can use one node to restore the other, while this greatly reduces the downtime of our services we might be able to do better, since we are taking a backup to the secondary node, if it had enough overhead it could run the most essential services while restoring the primary, the data is already there, we just need to distribute the workload properly. The project is soon to migrate to kubernetes for easier distribution management.
+The third topology will enable scaling out as we please too, this will be done in future releases where the project use kubernetes to divide tasks automatically between our nodes.
 
-
-### Network
+### Networking
 
 Since we run our services containerized, we do not need to expose the ports to the host, let alone the gateway, this offers us a very granular level of control to where and how our services can be interacted with. By default each service expose relevant ports from the container to the host, this means that all our services will work on devices connected to the same local area network (LAN), usually our home network. This is a relatively safe option, but it does mean that we cannot access our services our their data from any other network, it is perfectly adequate for some sensitive services, but for our documents and file syncronisation we might want higher availability.
 
