@@ -7,6 +7,9 @@ toc_label: "Table of content"
 toc_icon: "cog"
 ---
 
+This project is still undergoing alpha development, any experienced user can simply use the docker-compose stacks as is without much trouble.
+{: .notice--danger}
+
 For anyone who has tried using open source solutions, or to create small shortcuts in our digital lives may quickly notice that getting it to work was the easy part, it was keeping it working over time, making sure we lost no data, and got the data when we needed it that was hard, and time consuming; and it only grew worse as we try to combine multiple of these. The Automate Me project is intended to make self hosted projects easy to set up and expand, it is divided into three parts:
 - infrastructure: backups, network and security 
 - cloud: our data and services anywhere
