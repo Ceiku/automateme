@@ -1,4 +1,4 @@
-
+## Getting Started
 ### Pre-requisites
 
 Knowledge about docker and docker-compose is useful to the extent of understaing how these services work, while the images work fine on `amd64` architecture there are tags or images for `ARM` like raspberry pi. 

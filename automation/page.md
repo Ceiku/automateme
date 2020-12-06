@@ -1,6 +1,6 @@
 ---
 permalink: /automation/
-title: "Getting Started"
+title: "Smarter Automations"
 layout: single
 author_profile: true
 toc: true
