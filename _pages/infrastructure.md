@@ -7,4 +7,4 @@ toc_label: "My Table of Contents"
 toc_icon: "cog"
 ---
 
-{% include_relative infrastructure/README.md %}
+{% include https://raw.githubusercontent.com/Ceiku/automateme/master/cloud_services/README.md %}
