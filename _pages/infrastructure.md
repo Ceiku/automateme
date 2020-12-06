@@ -7,3 +7,4 @@ toc_label: "My Table of Contents"
 toc_icon: "cog"
 ---
 
+{% include_relative ../infrastructure/README.md %}
