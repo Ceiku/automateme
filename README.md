@@ -20,10 +20,8 @@ Each stack also contains a `.env.example` that should be renamed to `.env` and f
 
 ```
 TZ=Continent/Capital
-
-ad_psw=something_hard_to_guess_again
-ad_usr=username
-
+database_usr=username
+database_psw=something_hard_to_guess
 
 ## Optional settings
 # Current folder, assumed as default
@@ -34,7 +32,7 @@ They each have a structure like this, the top fields should be replaced, usually
 
 `docker-compose up -d`
 
-Which can be run again when we change some of our configurations, and can be modified with two useful flags:
+When inside that subdirectory, which can be run again when we change some of our configurations, and can be modified with two useful flags:
 - `--build`: rebuilds the containers from the `Dockerfile`
 - `--remove-orphan`: if we change names or become depricated, this will remove them
 
@@ -42,7 +40,9 @@ If we want to remove a service we can run:
 
 `docker-compose down`
 
-Which takes the whole stack down, or add the name of the individual services you want to remove.
+Which takes the whole stack down, both the `up` and `down` command can have any number of individual service names separated by space.
+
+`docker-compose down nextcloud influx` would only take down these two services.
 
 
 #### Guided initialisation
