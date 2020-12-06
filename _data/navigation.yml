@@ -4,6 +4,6 @@ main:
   - title: "Cloud Services"
     url: /cloud/
   - title: "Automation"
-    url: ../automation/
+    url: /automation/
   - title: "About"
     url: /about/

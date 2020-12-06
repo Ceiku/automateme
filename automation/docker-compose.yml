@@ -1,0 +1,89 @@
+# This is where we create storage solutions such as databases and file syncing tools such as nextcloud
+version: '3'
+services:
+  ## Crucial component for all other services
+  ## Used as home automation middleware between the IoT and smarthome devices, and the local and cloud services
+  home-assistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:stable
+    volumes:
+      - ${path_prefix}/homeassistant:/config:rw
+    environment:
+      - TZ=${TZ}
+    ports:
+      - 8123:8123
+    restart: unless-stopped
+
+  ## "The logic" of homeassistant, allows for complex automation in a pythonic way with code and yaml configurations
+  appdaemon:
+    build: appdaemon
+    container_name: appdaemon
+    environment:
+      - HA_URL=home-assistant
+      - TOKEN=token
+      - DASH_URL=http://localhost:5050
+    volumes:
+      - ${path_prefix}/appdaemon:/conf:rw
+    restart: unless-stopped
+
+  ## Home ERP system with REST API
+  grocy:
+    image: linuxserver/grocy
+    container_name: grocy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ${path_prefix}/grocy:/config:rw
+    ports:
+      - 9283:80
+      - 9284:443
+    restart: unless-stopped
+
+  ## Web interface for OTA flashing of ESP modules
+  ## Use only if creating or managing ESP modules
+  esphome:
+    container_name: esphome
+    image: esphome/esphome:dev
+    volumes: 
+      - ${path_prefix}/esphome:/config:rw
+    ports:
+      - 6052:6052
+      - 6053:6053
+    restart: unless-stopped
+
+  # Time series database for persistent records and data queries
+  influxdb:
+    container_name: influxdb
+    image: influxdb:latest
+    ports:
+      - 8086:8086 
+    volumes:
+      - ${path_prefix}/influx:/var/lib/influxdb:rw
+    environment:
+      - INFLUXDB_DB=home_assistant # do not change: unless you specify new name in home assistant config
+      - INFLUXDB_ADMIN_USER=${influx_usr}
+      - INFLUXDB_ADMIN_PASSWORD=${influx_psw}
+    restart: unless-stopped
+  
+  ## Web admin and query visualization interface for influxdb
+  chronograf:
+    container_name: chronograf
+    image: chronograf:latest
+    depends_on:
+      - influxdb
+    ports:
+      - 8888:8888
+    volumes:
+      - ${path_prefix}/chronograf:/var/lib/chronograf
+    environment:
+      - INFLUXDB_URL=${influxdb_url}
+      - INFLUXDB_USERNAME=${influx_usr}
+      - INFLUXDB_PASSWORD=${influx_psw}
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: home
