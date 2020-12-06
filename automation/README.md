@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 ## Smarter Automations
+=======
+## Getting Started
+### Pre-requisites
+
+Knowledge about docker and docker-compose is useful to the extent of understaing how these services work, while the images work fine on `amd64` architecture there are tags or images for `ARM` like raspberry pi. 
+>>>>>>> 6e62970eb3f6ba6865d0c92050181043fd08a3b8
 
 ### Setup
 The `.env` file for this project should contain the following 
