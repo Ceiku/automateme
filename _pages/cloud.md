@@ -10,4 +10,4 @@ toc_icon: "cog"
 Remeber to see the `README.md` for how to fill in the `.env` file!
 {: .notice--warning}
 
-{% include_relative README.md %}
+{% include_relative ../cloud/README.md %}
