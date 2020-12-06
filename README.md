@@ -54,13 +54,14 @@ The `init.sh` walks you through a few setup steps such as:
  
 It is still a pending feature that I have considered to generalize, in automation we find a lot of the same functionality that also synchronizes backup and other things together.
 
-### Notable Services:
+## Notable Services:
 
 - Nextcloud as a cloud platform
 - Home Assistant for automation
-- Bareos for backups
-- Code-server for a full Visual Studio IDE in the browser
-- Plex, a netflix and spotify service for your private content.
+- Bareos for platform independendent and distrubuted backups
+- Code-server, a full Visual Studio IDE in the browser
+- Plex, a netflix and spotify service for your private content
+- Linuxserver SWAG for SSL certificates and reverse proxy
 
 Home-Assistant is an integral piece of our home automation, the project itself is so big that is has been moved into its own repository with extended documentation.
 
