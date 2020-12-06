@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Getting Started
 
 ### Pre-requisites
@@ -7,6 +8,19 @@ Knowledge about docker and docker-compose is useful to the extent of understaing
 ### Setup
 
 The `.env` file is ignored by git tracking, and needs to be filled out (alternatively you can do this directly in the compose file but it's less adviced).
+=======
+<<<<<<< HEAD
+## Smarter Automations
+=======
+## Getting Started
+### Pre-requisites
+
+Knowledge about docker and docker-compose is useful to the extent of understaing how these services work, while the images work fine on `amd64` architecture there are tags or images for `ARM` like raspberry pi. 
+>>>>>>> 6e62970eb3f6ba6865d0c92050181043fd08a3b8
+
+### Setup
+The `.env` file for this project should contain the following 
+>>>>>>> 2624c7131921320de3300f661df39c2c587609d9
 ```
 TZ=Continent/Capital
 
@@ -29,6 +43,7 @@ token=!secret ad_token
 usb_device=/dev/tty*
 ```
 
+<<<<<<< HEAD
 The compose file also specifies a default network called home that is will expect to find when you deploy the services, if you haven't already done that run this command:
 
 `docker network create overlay home`
@@ -48,6 +63,8 @@ If we want to remove a service we can run:
 Which takes the whole stack down, or add the name of the individual services you want to remove.
 
 
+=======
+>>>>>>> 2624c7131921320de3300f661df39c2c587609d9
 ## Core Services
 
 ### Home-Assistant

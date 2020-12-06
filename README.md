@@ -1,26 +1,60 @@
-For anyone who has tried using open source solutions, or to create small shortcuts in our digital lives may quickly notice that getting it to work was the easy part, it was keeping it working over time, making sure we lost no data, and got the data when we needed it that was hard, and time consuming; and it only grew worse as we try to combine multiple of these. The Automate Me project is intended to make self hosted projects easy to set up and expand, it is divided into three parts:
-- infrastructure: backups, network and security 
-- cloud: our data and services anywhere
-- automation: IoT and contextual applications
+## Automate me
 
-The infrastructure stack takes care of most of the things that a cloud provider would do for us, if you want to host your own solutions privately and reliably this section is important, it does not need to be deployed pre-emptively and you can still test out other services or migrate to this project. If you are interested to read more about how this project was designed, and how to make the most of this, check out the Automate Me blog series. There we also go in depth on paradigms such as Ubiquitous Computing, how to game end of the line desktop games from our phones, and how to make computing fade into the background with contextual automations.
+The Automate Me project is a supplement to the blog posts here, and has a range of tools to provide self hosted ubiquitous computing paradigms. All the services (except ZeroTier) is deployed using containerization with docker and docker-compose. The infrastructure stack provide data assurance, network tools and security considerations, cloud services contains work and entertainment services like code-server and nextcloud. Since ubiquitous computing uses contextual information to remove the need for users attention, the automation stack provides tools for home, computer and smart assistants.
 
-## Setup
-While it is adviced to have general knowledge of docker and docker-compose with yaml, it is not required and following the steps in the readme setup should be sufficient.
-If any terminology used in this document is unfamiliar visiting the blog should provide an explenation of how to interpret these, a general understanding of ubiquitous computing and different hardware and OS platforms are provided as well. Each stack has a `README.md` with instruction on how to fill out the `.env` file, it will contain some sensitive data and is therefore added to the gitignore, and you fork the project and edit safely.
+### Pre-requisites
+
+Since the deployment framework is docker containerisation (kubernetes for clustering under development) general knowledge of it, docker-compose and YAML is recommended if you want to alter any services or configuration, and while the images work fine on `amd64` architecture there are tags or images for `ARM` like raspberry pi. 
+
+The compose file also specifies a default network called home that is will expect to find when you deploy the services, if you haven't already done that run this command:
+
+`docker network create overlay home`
+
+
+Beyond these considerations individual stacks might introduce additional requirements.
+
+### Setup
+
+
+Each stack also contains a `.env.example` that should be renamed to `.env` and filled in with the correct values, the `.env` file is ignored from the repository but you should still be carefull not unintentioally share it.
+
+```
+TZ=Continent/Capital
+
+ad_psw=something_hard_to_guess_again
+ad_usr=username
+
+
+## Optional settings
+# Current folder, assumed as default
+path_prefix=${pwd}
+
+```
+They each have a structure like this, the top fields should be replaced, usually paswords and usernames but also some optional setting that have default values. Instructions are presented for each stack individually, once this is complete the stack can be deployed with:
+
+`docker-compose up -d`
+
+Which can be run again when we change some of our configurations, and can be modified with two useful flags:
+- `--build`: rebuilds the containers from the `Dockerfile`
+- `--remove-orphan`: if we change names or become depricated, this will remove them
+
+If we want to remove a service we can run:
+
+`docker-compose down`
+
+Which takes the whole stack down, or add the name of the individual services you want to remove.
+
+
+#### Guided initialisation
 
 The `init.sh` walks you through a few setup steps such as:
  - automatic updates of host
  - installing docker if not present
  - adding docker priveleges to current user
- - select and deploy stacks
  
-It also provides one handy alias autome, that lets you supply stack names (selects all if none is provided) it will then run `docker-compose up -d --build --remove-orphans` selected stacks. It is important to note that these two helper scripts assume a debian flavour of linux, the current solution might need minor modifications to work on ARM architectures, look or request for the ARM branch for more information.
+It is still a pending feature that I have considered to generalize, in automation we find a lot of the same functionality that also synchronizes backup and other things together.
 
-### Alternatively
-Each stack is contained as an independed docker-compose, so you could move it anywhere you wanted, just provide the '.env' file inside that directory instead.
-
-## Notable Services:
+### Notable Services:
 
 - Nextcloud as a cloud platform
 - Home Assistant for automation
