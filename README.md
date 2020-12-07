@@ -16,25 +16,29 @@ The compose file also specifies a default network called home that is will expec
 Beyond these considerations individual stacks might introduce additional requirements.
 
 ### Setup
+The project contains an `.env.example` file that must be renamed to `.env`, this file is sanitized (ignored from tracking) and can be filled with your own data, just be sure to not unintentionally share it otherwise.
 
-
-Each stack also contains a `.env.example` that should be renamed to `.env` and filled in with the correct values, the `.env` file is ignored from the repository but you should still be carefull not unintentioally share it.
+The two first lines of the file is:
 
 ```
-TZ=Continent/Capital
-database_usr=username
-database_psw=something_hard_to_guess
+COMPOSE_PATH_SEPARATOR=:
+COMPOSE_FILE=infrastructure/admin/docker-compose.yml:infrastructure/backup/docker-compose.yml:infrastructure/network/docker-compose.yml:cloud/nextcloud/docker-compose.yml:automation/docker-compose.yml
+```
 
-## Optional settings
-# Current folder, assumed as default
+The `COMPOSE_FILE` is just the paths to the docker-compose files we want to use, the example file does not include the backup stacks, see the infrastructure documentation for more information on this. Some other commonly used variables are set there such as:
+
+```
 path_prefix=${pwd}
-
+TZ=Europe/London
 ```
-They each have a structure like this, the top fields should be replaced, usually paswords and usernames but also some optional setting that have default values. The path default is always the current directory, which is handy for quick deployments. Instructions are presented for each stack individually, once this is complete the stack can be deployed with:
+
+Each individual service may introduce new variables we need to set, most of these are usernames and passwords, sometimes we might need an API key or token and the instruction is presented in the relevant service documentation. This means that configuring our deployment and stack can be done unified through one file, alternatively the admin stack sets up Portainer for a web ui Docker administration tool.
+
+Once we have filled in the `.env` file as we desire we can deploy the whole project with:
 
 `docker-compose up -d`
 
-When inside that subdirectory, which can be run again when we change some of our configurations, and can be modified with two useful flags:
+Which can be run again when we change some of our configurations, and can also be modified with two useful flags:
 - `--build`: rebuilds the containers from the `Dockerfile`
 - `--remove-orphan`: if we change names or become depricated, this will remove them
 
@@ -46,15 +50,6 @@ Which takes the whole stack down, both the `up` and `down` command can have any 
 
 `docker-compose down nextcloud influx` would only take down these two services.
 
-
-#### Guided initialisation
-
-The `init.sh` walks you through a few setup steps such as:
- - automatic updates of host
- - installing docker if not present
- - adding docker priveleges to current user
- 
-It is still a pending feature that I have considered to generalize, in automation we find a lot of the same functionality that also synchronizes backup and other things together.
 
 ## Notable Services
 
