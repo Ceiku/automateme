@@ -1,11 +1,10 @@
-## Smarter Automations
-
+## Getting Started
 
 ### Setup
 The `.env` file for this project should contain the following 
 
 ```
-TZ=Continent/Capital
+TZ=Continent/Capitol
 
 influx_psw=something_hard_to_guess
 influx_usr=username
@@ -13,18 +12,23 @@ influx_usr=username
 ad_psw=something_hard_to_guess_again
 ad_usr=username
 
-# Assumed as default
-# Current folder
+## Optional Settings ##
 path_prefix=${pwd}
 
-# We can use a secrets.yml file
-# safely storing our home-assistant token
-token=!secret ad_token
+# usb_device=/dev/tty*
 
-# this one is optional
-# uncomment device section in compose file
-usb_device=/dev/tty*
+ad_token=!secret ad_token
 ```
+
+On the first deployment the token from home assistant that appdaemon needs cannot be made, once you have started home assistant you can follow these steps to make a token, then in `appdaemon/secrets.yml` add the line:
+
+`ad_token=yourtoken`
+
+And if it does not register the change you can always restart with:
+
+`docker restart appdaemon`
+
+The usb devices is only required if you have some usb tool for either bluetooth, ZigBee or other protocols for your home automation, and requires us to uncomment the device section in the `home-assistant` service in the `docker-compose.yml`.
 
 ## Core Services
 

@@ -28,7 +28,7 @@ database_psw=something_hard_to_guess
 path_prefix=${pwd}
 
 ```
-They each have a structure like this, the top fields should be replaced, usually paswords and usernames but also some optional setting that have default values. Instructions are presented for each stack individually, once this is complete the stack can be deployed with:
+They each have a structure like this, the top fields should be replaced, usually paswords and usernames but also some optional setting that have default values. The path default is always the current directory, which is handy for quick deployments. Instructions are presented for each stack individually, once this is complete the stack can be deployed with:
 
 `docker-compose up -d`
 
@@ -54,15 +54,13 @@ The `init.sh` walks you through a few setup steps such as:
  
 It is still a pending feature that I have considered to generalize, in automation we find a lot of the same functionality that also synchronizes backup and other things together.
 
-## Notable Services:
+## Notable Services
 
 - Nextcloud as a cloud platform
 - Home Assistant for automation
 - Bareos for platform independendent and distrubuted backups
 - Code-server, a full Visual Studio IDE in the browser
-- Plex, a netflix and spotify service for your private content
 - Linuxserver SWAG for SSL certificates and reverse proxy
 
-Home-Assistant is an integral piece of our home automation, the project itself is so big that is has been moved into its own repository with extended documentation.
 
 
