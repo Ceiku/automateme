@@ -1,6 +1,4 @@
-This is not a tutorial on the individual services, they are discussed a bit more in depth here, but they have thriving communities that I would suggest reading instead.
-In the aim of making our computer interactions available on any device, distributing them to the cloud is a key element, the main focus is to provide Nextcloud with file management, calendars, document collaboration. For developers the code-server gives us a cloud IDE (Visual Studio Code), setting up our shell and extensions to match our needs, now available on any device. We also discuss some tools for creative content developers who cannot find suitable tools for mobile devices, usually this is professional animation or video editing work and more in this blog post, even a comparison between LAN and cloud remote gaming. 
-
+## Core Services
 ## Nextcloud
 
 A cloud platform with all the whistle and bells of its commercial rivals, file storage, document collaboration, there is even a nifty cookbook that can take links from most online recipe sites and extract the data into one common cookbook, that even has a built in timer, it has a good app market and a thriving community. 
@@ -23,7 +21,7 @@ Before you deploy, it is recommended to read up on other authentication methods 
 {: .notice--warning}
 
 
-### Other
+## Other Servcies
 
 A collection of software that enhance or replace common features such as content streaming, file conversions and remote gaming. These are not really discussed as part of the project, but are things that I often set up for family and friends.
 
