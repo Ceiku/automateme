@@ -1,6 +1,8 @@
 ## Automate me
 
-The Automate Me project is a supplement to the blog posts here, and has a range of tools to provide self hosted ubiquitous computing paradigms. All the services (except ZeroTier) is deployed using containerization with docker and docker-compose. The infrastructure stack provide data assurance, network tools and security considerations, cloud services contains work and entertainment services like code-server and nextcloud. Since ubiquitous computing uses contextual information to remove the need for users attention, the automation stack provides tools for home, computer and smart assistants.
+The Automate Me project is a supplement to the blog posts here, and has a range of tools to provide self hosted ubiquitous computing paradigms. All the services (except ZeroTier) is deployed using containerization with docker and docker-compose. 
+
+The _infrastructure stack_ provide data assurance, network tools and security considerations, the _cloud stack_ contains work and entertainment services like code-server and nextcloud. To complete our ubiquitous computing framework we use contextual information to remove the need for users attention, the _automation stack_ provides tools for smart home and assistants.
 
 ### Pre-requisites
 
