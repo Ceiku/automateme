@@ -1,9 +1,4 @@
-## Getting Started
-
-The automation stack is actually divided into two, the core services presented in the `docker-compose.yml` file, and the extensions are present in `docker-compose.extend.yml`. 
-
-
-
+The automation stack is actually divided into two, the core services presented in the `docker-compose.yml` file, and the extensions are present in `docker-compose.extend.yml`. This separation is mainly to allow those who are learning automation to progress from an experimental build to a stable automation ecosystem.
 
 ## Core Services
 
@@ -37,7 +32,7 @@ The google assistant uses the `dialogflow` framework where we can specify intent
 
 The first option is highly discouraged at the time of writing as it only support basic features, using AppDaemon webhooks allows us to keep the whole automation project in the same language (YAML is used for docker-compose, home-assistant etc), while the Node server is easier to follow with the google documentation. 
 
-## Other
+## Other Services
 **ESPHome**
 While I consider this a core service, it is only usefull if we want to create our own IoT devices, it uses a YAML syntax that matches home-assistant which makes interoperability, code maintenance and the learning curve better than many other frameworks. Even as a seasoned developer it is nice to build anything from a simple sensor to an automated garden with only a few lines of code. 
 
